@@ -9,10 +9,11 @@ class App extends Component {
       {name:'vishal', age:'26'}
     ]
   }
-  switchHandler = ()=>{
+  switchHandler = (name,age)=>{
       this.setState({
         person:[
-          {name: 'vikas', age:'25'}
+          {name: 'vikas', age:'25'},
+          {name: name, age:age}
         ]
       })
   }
@@ -21,8 +22,9 @@ class App extends Component {
     return (
       <div className='App'>
         <h1> By JSX</h1>
-           <Person name={this.state.person[0].name} age={this.state.person[0].age} />
+           <Person name={this.state.person[0].name} age={this.state.person[0].age} click={()=>this.switchHandler('Vijay',25)} />
            <button onClick={this.switchHandler}>Switch</button>
+           <Person name={this.state.person[1].name} age={this.state.person[1].age} click={this.switchHandler.bind(this,'Disha','24')} />
        </div>
     )
   }
