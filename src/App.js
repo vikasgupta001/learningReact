@@ -17,6 +17,14 @@ class App extends Component {
         ]
       })
   }
+  changeText = (event)=>{
+    this.setState({
+      person:[
+        {name: 'vikas', age:'25'},
+        {name: event.target.value, age:'26'}
+      ]
+    })
+  }
   render() {
     //return React.createElement('div',{className:'App'},React.createElement('h1',null,'Hi, I am a react component'));
     return (
@@ -24,7 +32,7 @@ class App extends Component {
         <h1> By JSX</h1>
            <Person name={this.state.person[0].name} age={this.state.person[0].age} click={()=>this.switchHandler('Vijay',25)} />
            <button onClick={this.switchHandler}>Switch</button>
-           <Person name={this.state.person[1].name} age={this.state.person[1].age} click={this.switchHandler.bind(this,'Disha','24')} />
+           <Person name={this.state.person[1].name} age={this.state.person[1].age} click={this.changeText} />
        </div>
     )
   }
