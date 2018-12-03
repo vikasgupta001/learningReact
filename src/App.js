@@ -5,8 +5,8 @@ import Person from './Person/Person';
 class App extends Component {
   state ={
     person:[
-      {name: 'vikas', age:'23'},
-      {name:'vishal', age:'26'}
+      {id:1, name: 'vikas', age:'23'},
+      {id:2, name: 'vishal', age:'26'}
     ],
     showPerson:false,
     toggleBtnText:"Toggle Down"
@@ -27,7 +27,10 @@ class App extends Component {
       this.setState({showPerson:!doesShow,toggleBtnText: 'Toogle Up'});
   }
   deleteHandler=(index)=>{
-    let val = this.state.person;
+    // Way 1 Using Old JS Method
+    //let val = this.state.person.slice();
+    // Way 2 Using Spread Operator
+    let val = [...this.state.person];
     val.splice(index,1);
     this.setState({person:val});
   }
@@ -45,7 +48,7 @@ class App extends Component {
       personCon = (
                 <div>{
                       this.state.person.map((item, index)=>{
-                         return (<Person name={item.name} age={item.age} click={()=>this.deleteHandler(index)} />)
+                         return (<Person name={item.name} age={item.age} key={item.id} click={()=>this.deleteHandler(index)} />)
                       })
                      }
                 </div>
