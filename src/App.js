@@ -11,14 +11,6 @@ class App extends Component {
     showPerson:false,
     toggleBtnText:"Toggle Down"
   }
-  switchHandler = (name,age)=>{
-      this.setState({
-        person:[
-          {name: 'vikas', age:'25'},
-          {name: name, age:age}
-        ]
-      })
-  }
   changeText = (event)=>{
     this.setState({
       person:[
@@ -34,6 +26,11 @@ class App extends Component {
     else
       this.setState({showPerson:!doesShow,toggleBtnText: 'Toogle Up'});
   }
+  deleteHandler=(index)=>{
+    let val = this.state.person;
+    val.splice(index,1);
+    this.setState({person:val});
+  }
   render() {
     //return React.createElement('div',{className:'App'},React.createElement('h1',null,'Hi, I am a react component'));
     const style= {
@@ -47,8 +44,8 @@ class App extends Component {
     if(this.state.showPerson){
       personCon = (
                 <div>{
-                      this.state.person.map(item=>{
-                         return (<Person name={item.name} age={item.age} click={()=>this.switchHandler('Vijay',25)} />)
+                      this.state.person.map((item, index)=>{
+                         return (<Person name={item.name} age={item.age} click={()=>this.deleteHandler(index)} />)
                       })
                      }
                 </div>
