@@ -42,17 +42,21 @@ class App extends Component {
       'color':'white',
       'border':'1px solid blue'
     }
+    
+    let personCon = null;
+    if(this.state.showPerson){
+      personCon = (
+                <div>
+                  <Person name={this.state.person[0].name} age={this.state.person[0].age} click={()=>this.switchHandler('Vijay',25)} />
+                  <Person name={this.state.person[1].name} age={this.state.person[1].age} click={this.changeText} />
+                </div>
+      )
+    }
     return (
       <div className='App'>
         <h1> By JSX</h1>
             <button style={style} onClick={this.toggleDiv}>{this.state.toggleBtnText}</button>
-            {
-                this.state.showPerson ?
-                <div>
-                  <Person name={this.state.person[0].name} age={this.state.person[0].age} click={()=>this.switchHandler('Vijay',25)} />
-                  <Person name={this.state.person[1].name} age={this.state.person[1].age} click={this.changeText} />
-                </div> : null
-            }
+            {personCon}
       </div>
     )
   }
