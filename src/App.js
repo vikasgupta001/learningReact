@@ -11,13 +11,17 @@ class App extends Component {
     showPerson:false,
     toggleBtnText:"Toggle Down"
   }
-  changeText = (event)=>{
-    this.setState({
-      person:[
-        {name: 'vikas', age:'25'},
-        {name: event.target.value, age:'26'}
-      ]
-    })
+  changeText = (event,id)=>{
+    let personIndex = this.state.person.findIndex(p => p.id===id);
+    if(personIndex){
+      let personObject = {
+        ...this.state.person[personIndex]
+      };
+      personObject.name = event.target.value;
+      let personCollection = [...this.state.person];
+      personCollection[personIndex] = personObject;
+      this.setState({person:personCollection});
+    }
   }
   toggleDiv=()=>{
     const doesShow = this.state.showPerson;
@@ -38,7 +42,7 @@ class App extends Component {
     //return React.createElement('div',{className:'App'},React.createElement('h1',null,'Hi, I am a react component'));
     const style= {
       'font':'Arial',
-      'background':'Red',
+      'background':'Green',
       'color':'white',
       'border':'1px solid blue'
     }
@@ -48,11 +52,12 @@ class App extends Component {
       personCon = (
                 <div>{
                       this.state.person.map((item, index)=>{
-                         return (<Person name={item.name} age={item.age} key={item.id} click={()=>this.deleteHandler(index)} />)
+                         return (<Person name={item.name} age={item.age} key={item.id} click={()=>this.deleteHandler(index)} change={(event)=> this.changeText(event,item.id)} />)
                       })
                      }
                 </div>
             )
+            style.background="Red";
     }
     return (
       <div className='App'>
