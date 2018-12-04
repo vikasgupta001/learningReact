@@ -6,7 +6,8 @@ class App extends Component {
   state ={
     person:[
       {id:1, name: 'vikas', age:'23'},
-      {id:2, name: 'vishal', age:'26'}
+      {id:2, name: 'vishal', age:'26'},
+      {id:3, name: 'vikram', age:'25'}
     ],
     showPerson:false,
     toggleBtnText:"Toggle Down"
@@ -59,9 +60,15 @@ class App extends Component {
             )
             style.background="Red";
     }
+    const textIndicator = [];
+    if(this.state.person.length <=2)
+      textIndicator.push('red');
+    if(this.state.person.length <=1)
+      textIndicator.push('italic');
+
     return (
       <div className='App'>
-        <h1> By JSX</h1>
+        <h3 className={textIndicator.join(' ')}> By JSX</h3>
             <button style={style} onClick={this.toggleDiv}>{this.state.toggleBtnText}</button>
             {personCon}
       </div>
