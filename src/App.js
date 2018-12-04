@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
-import  Radium from 'radium';
+import  Radium,{StyleRoot} from 'radium';
 
 class App extends Component {
   state ={
@@ -78,11 +78,14 @@ class App extends Component {
       textIndicator.push('italic');
 
     return (
-      <div className='App'>
-        <h3 className={textIndicator.join(' ')}> By JSX</h3>
-            <button style={style} onClick={this.toggleDiv}>{this.state.toggleBtnText}</button>
-            {personCon}
-      </div>
+      <StyleRoot>
+          <div className='App'>
+            <h3 className={textIndicator.join(' ')}> By JSX</h3>
+                <button style={style} onClick={this.toggleDiv}>{this.state.toggleBtnText}</button>
+                {personCon}
+          </div>
+      </StyleRoot>
+      
     )
   }
 }
